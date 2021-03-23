@@ -1,5 +1,8 @@
 #include <Adafruit_INA219.h>
+#include <LiquidCrystal_I2C.h>
 #include <Wire.h>
+#include <LiquidCrystal_I2C.h>
+LiquidCrystal_I2C lcd(0x27, 16, 2);
 Adafruit_INA219 ina219_A;
 Adafruit_INA219 ina219_B(0x41);
 void setup(void) {
@@ -7,7 +10,8 @@ void setup(void) {
   uint32_t currentFrequency;
 ina219_A.begin();
 ina219_B.begin();
-
+lcd.init();
+lcd.backlight();
 }
 
 void loop(void) {
@@ -32,7 +36,11 @@ void loop(void) {
 //  Serial.print(power_mW);
   Serial.println(Data);
   
-    
+int total = power_mW+ bpower_mW;
+ lcd.setCursor(0, 0);
+lcd.print("USE Electircity");
+lcd.setCursor(0, 1);
+lcd.print(total);
     
     
 
